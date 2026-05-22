@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Saad Hassan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f0e8;
+      --ink: #1a1410;
+      --muted: #8a7f70;
+      --rule: #d4cdc0;
+      --accent: #c1440e;
+      --surface: #ede8de;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* GRAIN */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1000;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    .wrap { max-width: 860px; margin: 0 auto; padding: 0 28px; }
+
+    /* ── HEADER ── */
+    header {
+      padding: 72px 0 0;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .h-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .h-name h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(64px, 14vw, 120px);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+    }
+
+    .h-name h1 em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .h-meta {
+      text-align: right;
+      padding-top: 8px;
+    }
+
+    .h-role {
+      font-family: 'Crimson Pro', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .h-contacts { display: flex; flex-direction: column; gap: 5px; align-items: flex-end; }
+
+    .h-contacts a {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .h-contacts a:hover { color: var(--accent); }
+
+    .h-strip {
+      display: flex;
+      gap: 0;
+      border-top: 1px solid var(--rule);
+      overflow-x: auto;
+    }
+
+    .h-strip span {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 12px 20px;
+      border-right: 1px solid var(--rule);
+      white-space: nowrap;
+    }
+
+    .h-strip span.avail { color: var(--accent); }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--ink);
+    }
+
+    nav .wrap { display: flex; overflow-x: auto; }
+
+    nav a {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 14px 20px;
+      border-right: 1px solid var(--rule);
+      white-space: nowrap;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    nav a:hover, nav a.on { color: var(--bg); background: var(--ink); }
+
+    /* ── SECTIONS ── */
+    section { padding: 60px 0; border-bottom: 1px solid var(--rule); }
+
+    .s-head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .s-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: var(--rule);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .s-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 0.05em;
+      color: var(--ink);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    @media (max-width: 580px) { .about-grid { grid-template-columns: 1fr; } }
+
+    .about-bio {
+      font-family: 'Crimson Pro', serif;
+      font-size: 18px;
+      line-height: 1.8;
+      color: #3a3028;
+    }
+
+    .about-bio p + p { margin-top: 14px; }
+
+    .lang-block { margin-top: 28px; }
+
+    .lang-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .lang-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .lang-name { font-size: 13px; color: var(--ink); }
+    .lang-level { font-size: 11px; color: var(--accent); }
+
+    .open-to {
+      background: var(--ink);
+      color: var(--bg);
+      padding: 24px;
+      margin-top: 0;
+    }
+
+    .open-to-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .open-to ul { list-style: none; }
+
+    .open-to li {
+      font-size: 12px;
+      padding: 5px 0;
+      border-bottom: 1px solid #2e2820;
+      color: #c8c0b0;
+    }
+
+    .open-to li::before { content: '→ '; color: var(--accent); }
+
+    /* ── SKILLS ── */
+    .skills-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--rule);
+    }
+
+    .skills-table tr { border-bottom: 1px solid var(--rule); }
+    .skills-table tr:last-child { border-bottom: none; }
+
+    .skills-table td {
+      padding: 14px 18px;
+      vertical-align: top;
+    }
+
+    .skills-table td:first-child {
+      width: 160px;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-right: 1px solid var(--rule);
+      white-space: nowrap;
+    }
+
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .pill {
+      font-size: 11px;
+      border: 1px solid var(--rule);
+      padding: 3px 10px;
+      color: var(--ink);
+      background: var(--surface);
+    }
+
+    /* ── EDUCATION ── */
+    .edu-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .edu-row:last-child { border-bottom: none; }
+
+    @media (max-width: 500px) { .edu-row { grid-template-columns: 1fr; } }
+
+    .edu-year {
+      font-size: 11px;
+      color: var(--accent);
+      padding-top: 3px;
+    }
+
+    .edu-degree {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+
+    .edu-school { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+
+    .course-list { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .course {
+      font-size: 10px;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      padding: 3px 9px;
+      color: var(--muted);
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-item {
+      padding: 32px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .exp-item:last-child { border-bottom: none; }
+
+    .exp-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .exp-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 0.04em;
+    }
+
+    .exp-period {
+      font-size: 11px;
+      color: var(--accent);
+      white-space: nowrap;
+      padding-top: 5px;
+    }
+
+    .exp-co { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
+
+    .exp-bullets { list-style: none; }
+
+    .exp-bullets li {
+      font-size: 13px;
+      color: #4a4038;
+      padding: 4px 0;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* ── PROJECTS ── */
+    .proj-card {
+      border: 1px solid var(--rule);
+      padding: 28px;
+      margin-bottom: 1px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: start;
+      transition: border-color 0.2s, background 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .proj-card:hover { border-color: var(--ink); background: var(--surface); }
+
+    .proj-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: start;
+    }
+
+    @media (max-width: 500px) { .proj-inner { grid-template-columns: 1fr; } }
+
+    .proj-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    .proj-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    .proj-tech { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .t-tag {
+      font-size: 10px;
+      color: var(--accent);
+      border: 1px solid #e0d0c0;
+      padding: 2px 8px;
+    }
+
+    .proj-link {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--rule);
+      padding: 6px 12px;
+      white-space: nowrap;
+      align-self: start;
+    }
+
+    .proj-card:hover .proj-link { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .f-big {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 10vw, 80px);
+      color: var(--rule);
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    .f-line { font-size: 11px; color: var(--muted); letter-spacing: 0.15em; }
+
+    /* ANIMATIONS */
+    @keyframes up {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .au { animation: up 0.5s ease forwards; opacity: 0; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.15s; }
+    .d3 { animation-delay: 0.25s; }
+    .d4 { animation-delay: 0.35s; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="h-top">
+      <div class="h-name au">
+        <h1>Saad<br/><em>Hassan</em></h1>
+      </div>
+      <div class="h-meta au d2">
+        <div class="h-role">Frontend Dev & LinkedIn Manager</div>
+        <div class="h-contacts">
+          <a href="mailto:saadh4377@gmail.com">saadh4377@gmail.com</a>
+          <a href="https://github.com/SaadHassan344" target="_blank">github.com/SaadHassan344</a>
+          <a href="#">Lahore, Pakistan</a>
+        </div>
+      </div>
+    </div>
+    <div class="h-strip au d3">
+      <span>BSc Software Engineering · UMT</span>
+      <span>2024 — Present</span>
+      <span class="avail">● Open to Freelance &amp; Full-time</span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#education">Education</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+  </div>
+</nav>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="s-num">01</div>
+      <div class="s-title">About</div>
+    </div>
+    <div class="about-grid">
+      <div>
+        <div class="about-bio">
+          <p>I'm a first-year Software Engineering student at UMT Lahore, building skills in frontend development and social media strategy at the same time.</p>
+          <p>I build web applications using React and manage LinkedIn accounts for CEOs in the bikers industry — writing content, developing strategy, and growing their presence from scratch.</p>
+          <p>I'm looking for freelance projects, internships, and full-time opportunities where I can contribute across both tracks.</p>
+        </div>
+        <div class="lang-block">
+          <div class="lang-label">Languages</div>
+          <div class="lang-row"><span class="lang-name">Urdu</span><span class="lang-level">Native</span></div>
+          <div class="lang-row"><span class="lang-name">English</span><span class="lang-level">C1 — Proficient</span></div>
+          <div class="lang-row"><span class="lang-name">German</span><span class="lang-level">A2 — Elementary</span></div>
+        </div>
+      </div>
+      <div class="open-to">
+        <div class="open-to-label">Open to</div>
+        <ul>
+          <li>Freelance web development</li>
+          <li>LinkedIn content management</li>
+          <li>Internships</li>
+          <li>Full-time junior roles</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="s-num">02</div>
+      <div class="s-title">Skills</div>
+    </div>
+    <table class="skills-table">
+      <tr>
+        <td>Frontend</td>
+        <td><div class="skill-pills">
+          <span class="pill">React</span>
+          <span class="pill">HTML</span>
+          <span class="pill">CSS</span>
+          <span class="pill">JavaScript</span>
+        </div></td>
+      </tr>
+      <tr>
+        <td>Content</td>
+        <td><div class="skill-pills">
+          <span class="pill">LinkedIn Strategy</span>
+          <span class="pill">Copywriting</span>
+          <span class="pill">Post Scheduling</span>
+          <span class="pill">Engagement Management</span>
+        </div></td>
+      </tr>
+      <tr>
+        <td>Tools</td>
+        <td><div class="skill-pills">
+          <span class="pill">Git & GitHub</span>
+          <span class="pill">VS Code</span>
+          <span class="pill">Vercel</span>
+        </div></td>
+      </tr>
+      <tr>
+        <td>Currently Learning</td>
+        <td><div class="skill-pills">
+          <span class="pill">TypeScript</span>
+          <span class="pill">Databases</span>
+          <span class="pill">Networking</span>
+          <span class="pill">Assembly Language</span>
+        </div></td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="s-num">03</div>
+      <div class="s-title">Education</div>
+    </div>
+    <div class="edu-row">
+      <div class="edu-year">Oct 2024<br/>— Present</div>
+      <div>
+        <div class="edu-degree">BSc Software Engineering</div>
+        <div class="edu-school">University of Management and Technology (UMT) — Lahore, Pakistan</div>
+        <div class="course-list">
+          <span class="course">Software Engineering</span>
+          <span class="course">Software Requirements Engineering</span>
+          <span class="course">Database Management Systems</span>
+          <span class="course">Assembly Language</span>
+          <span class="course">Computer Networking</span>
+          <span class="course">Object-Oriented Programming</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="s-num">04</div>
+      <div class="s-title">Experience</div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-top">
+        <div class="exp-title">LinkedIn Content Manager</div>
+        <div class="exp-period">2024 — Present</div>
+      </div>
+      <div class="exp-co">CEOs · Bikers Industry · Freelance</div>
+      <ul class="exp-bullets">
+        <li>Manage LinkedIn accounts for CEOs in the motorcycle/bikers industry</li>
+        <li>Develop content strategy tailored to each client's brand voice and audience</li>
+        <li>Write posts, plan publishing schedules, and handle engagement and replies</li>
+        <li>Grew client presence from ground up through consistent, targeted content</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-top">
+        <div class="exp-title">Frontend Developer</div>
+        <div class="exp-period">2024 — Present</div>
+      </div>
+      <div class="exp-co">Independent Projects · Freelance</div>
+      <ul class="exp-bullets">
+        <li>Built NutriFit Labs — a health and workout planning platform for athletes using React</li>
+        <li>Deployed to production on Vercel with a live, functional user interface</li>
+        <li>Handled all frontend development, UI design, and deployment independently</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="s-num">05</div>
+      <div class="s-title">Projects</div>
+    </div>
+
+    <a class="proj-card" href="https://human-science-hub.vercel.app/" target="_blank">
+      <div class="proj-inner">
+        <div>
+          <div class="proj-name">NutriFit Labs</div>
+          <div class="proj-desc">A health-based web platform for athletes. Helps users plan workouts and daily routines. Built and deployed independently as a fully functional React application.</div>
+          <div class="proj-tech">
+            <span class="t-tag">React</span>
+            <span class="t-tag">JavaScript</span>
+            <span class="t-tag">Vercel</span>
+          </div>
+        </div>
+        <div class="proj-link">View Live ↗</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-big">SAAD HASSAN</div>
+    <div class="f-line">saadhassan.github.io &nbsp;·&nbsp; saadh4377@gmail.com &nbsp;·&nbsp; Lahore, Pakistan</div>
+  </div>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('nav a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(a => a.classList.remove('on'));
+        const a = document.querySelector(`nav a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('on');
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>
